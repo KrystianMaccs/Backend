@@ -22,15 +22,18 @@ ALLOWED_HOSTS = ['web.gocreateafrica.app', 'gocreateafrica.app', 'www.web.gocrea
 
 # Application definition
 
-INSTALLED_APPS = [
+# Application definition
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
 
-    'subscriptions',
+LOCAL_APPS = [
+     'subscriptions',
     'systemcontrol',
     'accounts',
     'frontend',
@@ -39,13 +42,16 @@ INSTALLED_APPS = [
     'adverts',
     'songs',
     'sso',
-
+]
+THIRD_PARTY_APPS = [
     'django_q',
     'storages',
     'drf_yasg',
     'corsheaders',
     'rest_framework',
 ]
+INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -115,7 +121,7 @@ Q_CLUSTER = {
 
 CORS_REPLACE_HTTPS_REFERER = True
 HOST_SCHEME = "https://"
-ECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True

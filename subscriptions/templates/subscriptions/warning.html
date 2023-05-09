@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Your subscription ({{ package.title }}) will expire tomorrow.
+{% endblock %}
+
+{% block welcome %}
+
+{% endblock %}
+
+
+{% block salutation %}
+Hi {{ artist.get_full_name }},
+{% endblock %}
+
+
+{% block sub_title %}
+<br />
+
+
+{% endblock %}
+
+
+{% block content %}
+Please renew your subscription
+
+Songs: {{ songs }}
+{% endblock %}

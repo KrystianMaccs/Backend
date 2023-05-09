@@ -1,0 +1,16 @@
+[Unit]
+Description=qcluster daemon
+After=network.target
+After=mysql.service
+After=nginx.service
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+Restart=always
+WorkingDirectory=/app/gocreate
+ExecStart=/app/gocreate/env/bin/python /app/gocreate/manage.py qcluster
+
+[Install]
+WantedBy=multi-user.target

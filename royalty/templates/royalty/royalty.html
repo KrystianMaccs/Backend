@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block welcome %}
+Welcome to Gocreate!
+{% endblock %}
+
+
+{% block salutation %}
+Hi {{ fullname }},
+{% endblock %}
+
+
+{% block sub_title %}
+<br />
+{{ artist.get_full_name }}
+{% if artist.stage_name is not None and artist.stage_name != '' %}
+A.K.A {{ artist.stage_name }}
+{% endif %}
+added you as a beneficiary for the song
+"{{ song_title }}".
+
+{% if description is not None and description != '' %}
+<p>
+  Royalty Description: "{{ description }}"
+</p>
+{% endif %}
+
+<p>
+  <b>
+    Your share in this song is {{ share }}%
+  </b>
+</p>
+
+{% endblock %}
+
+
+{% block content %}
+<p>
+  To claim this share please click the link below to confirm or register your account details.
+</p>
+<a href="http://{{ domain }}/royalty/verify/?uidb64={{uid}}&token={{token}}">
+  http://{{ domain }}/royalty/verify/?uidb64={{uid}}&token={{token}}
+</a>
+{% endblock %}

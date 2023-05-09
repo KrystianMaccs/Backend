@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Complete your registration on Gocreate 
+{% endblock %}
+
+{% block welcome %}
+  welcome to Gocreate!
+{% endblock %}
+
+{% block image_purpose %}
+  <img
+    align="center"
+    alt="I'm an image"
+    border="0"
+    class="center fixedwidth"
+    src="https://d1oco4z2z1fhwp.cloudfront.net/templates/default/1561/Welcome_Email.png"
+    style="
+      text-decoration: none;
+      -ms-interpolation-mode: bicubic;
+      height: auto;
+      border: 0;
+      width: 100%;
+      max-width: 420px;
+      display: block;
+    "
+    title="I'm an image"
+    width="420"
+  />
+{% endblock %}
+
+{% block salutation %}
+    Hi {{ user.first_name }} {{ user.last_name }}, 
+{% endblock %}
+
+{% block greetings %}
+    Thank you for registering!
+{% endblock %}
+
+{% block sub_title %}
+    <br />
+    Use the link below to complete your registration
+{% endblock %}
+
+
+{% block content %}
+    <a href="http://{{ domain }}/accounts/verify/?uidb64={{uid}}&token={{token}}">
+        http://{{ domain }}/accounts/verify/?uidb64={{uid}}&token={{token}}
+    </a>
+    
+{% endblock %}
+
+

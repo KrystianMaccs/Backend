@@ -1,0 +1,24 @@
+upstream gocreate {
+    server unix:/app/gocreate.sock;
+}
+
+server {
+        listen 80;
+
+    charset     utf-8;
+    location = /favicon.ico {access_log off; log_not_found off; }
+
+    location  /static/ {
+        autoindex on;
+        alias  /app/gocreate/static/;
+    }
+    location /static/admin {
+        alias /app/gocreate/env/lib/python3.7/site-packages/django/contrib/admin/static/admin;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://gocreate;
+    }
+
+}

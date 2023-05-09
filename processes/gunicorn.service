@@ -1,0 +1,14 @@
+[Unit]
+Description=gunicorn daemon
+After=network.target
+After=mysql.service
+After=nginx.service
+
+[Service]
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/app/gocreate
+ExecStart=/app/gocreate/env/bin/gunicorn --access-logfile - --workers 2 --bind unix:/app/gocreate.sock gocreate.wsgi:application
+
+[Install]
+WantedBy=multi-user.target

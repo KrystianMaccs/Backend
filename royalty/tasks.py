@@ -1,5 +1,5 @@
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_text
+from django.utils.encoding import force_bytes, force_str
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.utils import timezone
@@ -89,7 +89,7 @@ def confirm_royalty_mail(params):
 def verify_royalty_email(uidb64, token):
     content = None
     try:
-        decoded_content = force_text(urlsafe_base64_decode(uidb64))
+        decoded_content = force_str(urlsafe_base64_decode(uidb64))
         content = json.loads(decoded_content)
 
         try:

@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.conf import settings
 from django.urls import path, include, re_path
-from django.conf.urls import url
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
 
@@ -36,13 +35,17 @@ urlpatterns = [
     path('api/v1/systemcontrol/', include('systemcontrol.urls')),
     path('api/v1/subscriptions/', include('subscriptions.urls')),
 
-    url(r'^api/docs/swagger/$', schema_view.with_ui('swagger',
+    path('api/docs/swagger/', schema_view.with_ui('swagger',
                                                     cache_timeout=0), name='schema-swagger-ui'),
-    url(r'^api/docs/redoc/$', schema_view.with_ui('redoc',
+    path('api/docs/redoc/', schema_view.with_ui('redoc',
                                                   cache_timeout=0), name='schema-redoc'),
 ]
 
 if settings.DEBUG:
+    extrapattern = [
+        path("__debug__/", include("debug_toolbar.urls")),
+    ]
+    urlpatterns += extrapattern
     urlpatterns += static(settings.STATIC_URL,
                           document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL,

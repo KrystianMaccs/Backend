@@ -1,8 +1,8 @@
-from rest_framework_jwt.authentication import BaseJSONWebTokenAuthentication
-from rest_framework_jwt.settings import api_settings
-from django.utils.translation import ugettext as _
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework_simplejwt.settings import api_settings
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
-from django.utils.encoding import smart_text
+from django.utils.encoding import smart_str
 from rest_framework import exceptions
 
 from accounts.models import Artist
@@ -13,28 +13,38 @@ from rest_framework.authentication import (
 
 from sso.models import AppAuthLog
 
-JWT_PAYLOAD_HANDLER = api_settings.JWT_PAYLOAD_HANDLER
-JWT_ENCODE_HANDLER = api_settings.JWT_ENCODE_HANDLER
+# JWT_PAYLOAD_HANDLER = api_settings.JWT_PAYLOAD_HANDLER
+# JWT_ENCODE_HANDLER = api_settings.JWT_ENCODE_HANDLER
 
-jwt_decode_handler = api_settings.JWT_DECODE_HANDLER
-jwt_get_username_from_payload = api_settings.JWT_PAYLOAD_GET_USERNAME_HANDLER
+# jwt_decode_handler = api_settings.JWT_DECODE_HANDLER
+# jwt_get_username_from_payload = api_settings.JWT_PAYLOAD_GET_USERNAME_HANDLER
 
 User = get_user_model()
 
 
-def assign_token(user):
-    payload = JWT_PAYLOAD_HANDLER(user)
-    jwt_token = JWT_ENCODE_HANDLER(payload)
+# def assign_token(user):
+#     payload = JWT_PAYLOAD_HANDLER(user)
+#     jwt_token = JWT_ENCODE_HANDLER(payload)
 
-    return jwt_token
+#     return jwt_token
 
 
-class BaseSSOAuthWebTokenAuthenticate(BaseJSONWebTokenAuthentication):
-    def authenticate_credentials(self, payload):
+class BaseSSOAuthWebTokenAuthenticate(JWTAuthentication):
+    def authenticate(self, request):
         """
         Returns an active user that matches the payload's user id and email.
         """
-        username = jwt_get_username_from_payload(payload)
+        header = self.get_header(request)
+        if header is None:
+            return None
+
+        raw_token = self.get_raw_token(header)
+        if raw_token is None:
+            return None
+
+        validated_token = self.get_validated_token(raw_token)
+        user = self.get_user(validated_token)
+        username = user.username
 
         if not username:
             msg = _('Invalid payload.')
@@ -77,7 +87,7 @@ class SSOAuthWebTokenAuthenticate(BaseSSOAuthWebTokenAuthenticate):
                 return request.COOKIES.get(api_settings.JWT_AUTH_COOKIE)
             return None
 
-        if smart_text(auth[0].lower()) != auth_header_prefix:
+        if smart_str(auth[0].lower()) != auth_header_prefix:
             return None
 
         if len(auth) == 1:

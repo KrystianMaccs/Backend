@@ -3,7 +3,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.serializers.json import DjangoJSONEncoder
-from django.utils.encoding import force_bytes, force_text
+from django.utils.encoding import force_bytes, force_str
 from django.template.loader import render_to_string
 from django.contrib.auth import get_user_model
 from django.core.mail import EmailMessage
@@ -83,7 +83,7 @@ def confirm_reset_password(params):
 
 def verify_artist_email(uidb64, token):
     try:
-        decoded_content = force_text(urlsafe_base64_decode(uidb64))
+        decoded_content = force_str(urlsafe_base64_decode(uidb64))
         content = json.loads(decoded_content)
 
         try:

@@ -18,7 +18,7 @@ SECRET_KEY = os.environ.get(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', False)
 
-ALLOWED_HOSTS = ['web.gocreateafrica.app', 'gocreateafrica.app', 'www.web.gocreateafrica.app']
+ALLOWED_HOSTS = ['web.gocreateafrica.app', 'gocreateafrica.app', 'www.web.gocreateafrica.app', '127.0.0.1']
 
 # Application definition
 

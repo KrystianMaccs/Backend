@@ -1,15 +1,16 @@
-from rest_framework_jwt.settings import api_settings
+from rest_framework_simplejwt.settings import api_settings
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.models import Group
 from rest_framework import serializers
 
 from django.utils import timezone
+from rest_framework_simplejwt.tokens import AccessToken, RefreshToken
 
-from .authentication import assign_token
+# from .custom_jwt import assign_token
 from .models import Artist, ArtistStorage, BankAccount, UserPhoto, StaffProfile
 
-JWT_PAYLOAD_HANDLER = api_settings.JWT_PAYLOAD_HANDLER
-JWT_ENCODE_HANDLER = api_settings.JWT_ENCODE_HANDLER
+# JWT_PAYLOAD_HANDLER = api_settings.JWT_PAYLOAD_HANDLER
+# JWT_ENCODE_HANDLER = api_settings.JWT_ENCODE_HANDLER
 
 User = get_user_model()
 
@@ -145,7 +146,7 @@ class LoginSerializer(serializers.Serializer):
         user = authenticate(**data)
         if user is not None :
             if user.is_active:
-                jwt_token = assign_token(user)
+                jwt_token = AccessToken.for_user(user)
                 user.last_login = timezone.now()
                 user.save()
                 return {'user': user, 'token': jwt_token}

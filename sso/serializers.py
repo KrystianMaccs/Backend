@@ -2,7 +2,8 @@ from rest_framework import serializers
 from django.contrib.auth import authenticate
 
 from django.utils import timezone
-from accounts.authentication import assign_token
+from rest_framework_simplejwt.tokens import AccessToken, RefreshToken
+# from accounts.custom_jwt import assign_token
 from accounts.models import Artist
 from sso.models import AppAuthLog, IdentityApp
 
@@ -172,7 +173,7 @@ class GetAccessTokenSerializer(serializers.Serializer):
 
                 artist = log.artist
 
-                token = assign_token(artist)
+                token = AccessToken.for_user(artist)
 
                 return {'jwt_token': token}
 

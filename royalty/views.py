@@ -7,7 +7,9 @@ from .models import Royalty, RoyaltyProfile
 from .permissions import IsRoyalty, IsProfileOwner
 from .serializers import (RoyaltySerializer, RoyaltyProfileSerializer,
                           RoyaltyBankSerializer, ConfirmRoyaltySerializer)
-from accounts.authentication import assign_token
+# from accounts.authentication import assign_token
+from rest_framework_simplejwt.tokens import AccessToken, RefreshToken
+
 from utils.api.twilio import verify_otp
 
 from songs.models import RoyaltySplit
@@ -68,7 +70,8 @@ class AuthneticateRoyaltyAPIView(generics.GenericAPIView):
 
             response = {
                 'status': valid,
-                'token': assign_token(royalty),
+                'access_token': AccessToken.for_user(royalty),
+                'refresh_token': RefreshToken.for_user(royalty),
                 'royalty': RoyaltySerializer(royalty).data
             }
 

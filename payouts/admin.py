@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Charge, PayoutHistory, PayoutDue, Payout
+from .models import Charge, Payout, PayoutHistory, PayoutDue, ArtistPayout
 
 
 @admin.register(Payout)
@@ -54,3 +54,8 @@ class PayoutHistoryAdmin(admin.ModelAdmin):
     list_filter = (
         'payout',
     )
+
+
+@admin.register(ArtistPayout)
+class ArtistPayoutAdmin(admin.ModelAdmin):
+    pass

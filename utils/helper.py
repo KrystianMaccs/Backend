@@ -29,7 +29,7 @@ def compressImage(image):
 def redefinedFileName(instance, filename):
     ext = filename.split('.')[-1]
     filename = "%s.%s" % (uuid.uuid4(), ext)
-    return os.path.join(instance.song_dir, filename)
+    return os.path.join(instance.directory_string_var, filename)
 
 
 def redefinedSongFileName(instance, filename):

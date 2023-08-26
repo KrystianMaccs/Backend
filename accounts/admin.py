@@ -1,13 +1,74 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.utils.translation import gettext_lazy as _
 
-from .models import Artist, BankAccount, ArtistStorage, UserPhoto, StaffProfile
+from .models import Artist, BankAccount, ArtistStorage, CustomUser, UserPhoto, StaffProfile
 from .forms import (ArtistChangeForm, ArtistCreationForm)
 
 admin.site.site_header = 'GoCreate Administration'
 admin.site.site_title = 'GoCreate'
 
 
+@admin.register(CustomUser)
+class CustomUserAdmin(BaseUserAdmin):
+    model = CustomUser
+    ordering = ('email', 'first_name', 'last_name')
+    list_display_links = ['username', 'email']
+    list_display = [
+        "username",
+        "first_name",
+        "last_name",
+        "email",
+        "is_staff",
+        "date_joined",
+        "last_login",
+        "is_superuser",
+        "is_staff",
+    ]
+    fieldsets = (
+        (None, {"fields": ("password",)}),
+        (
+            _("Personal info"),
+            {
+                "fields": (
+                    "username",
+                    "first_name",
+                    "last_name",
+                    "email",
+                )
+            },
+        ),
+        (
+            _("Permissions"),
+            {
+                "fields": (
+                    "is_active",
+                    "is_staff",
+                    "is_superuser",
+                    "groups",
+                    "user_permissions",
+                ),
+            },
+        ),
+        (_("Important dates"), {"fields": ("last_login", "date_joined")}),
+    )
+    add_fieldsets = (
+        (
+            None,
+            {
+                "classes": ("wide",),
+                "fields": (
+                    "username",
+                    "first_name",
+                    "last_name",
+                    "email",
+                    "mobile_no",
+                    "password1",
+                    "password2",
+                ),
+            },
+        ),
+    )
 @admin.register(UserPhoto)
 class UserPhotoAdmin(admin.ModelAdmin):
     pass

@@ -4,7 +4,7 @@ from pathlib import Path
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 
@@ -106,6 +106,7 @@ INTERNAL_IPS = [
 
 Q_CLUSTER = {
 'name': 'go_create_async_worker',
+'retry': 150,
 'workers': 8,
 'recycle': 500,
 'timeout': 120,
@@ -156,12 +157,17 @@ STRIPE_LIVE_KEY = ''
 # EMAIL_HOST_PASSWORD = 'Makeithappen123'
 # EMAIL_USE_TLS = True
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = "gocreateapps@gmail.com"
-EMAIL_HOST_PASSWORD = 'ebqqpbeqqjklwjlv'
-EMAIL_USE_TLS = True
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = "gocreateapps@gmail.com"
+# EMAIL_HOST_PASSWORD = 'ebqqpbeqqjklwjlv'
+# EMAIL_USE_TLS = True
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_EMAIL = 'gocreateapps@gmail.com'
 
 
 
@@ -253,3 +259,5 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.JSONParser',
     ],
 }
+
+AUTH_USER_MODEL = "accounts.CustomUser"

@@ -5,19 +5,32 @@ from django.core.mail import send_mail
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as  _
 from django.contrib.auth.models import User as BaseUser
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import AbstractBaseUser, AbstractUser
 
 from utils.helper import compressImage, redefinedFileName
-from .managers import ArtistManager
+from .managers import ArtistManager, CustomUserManager
 
 
-User = get_user_model()
+# User = get_user_model()
+
+
+class CustomUser(AbstractUser):
+    # username = None
+    # USERNAME_FIELD = 'email'
+    # REQUIRED_FIELDS = []
+
+    email = models.EmailField(_('email address'), unique=True)
+
+    objects =  CustomUserManager()
+
+    class Meta:
+        verbose_name_plural = "Users"
 
 
 class StaffProfile(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     role = models.CharField(max_length=45, blank=True, null=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     change_password = models.BooleanField(default=False)
 
 
@@ -79,7 +92,7 @@ class Artist(AbstractBaseUser):
 class UserPhoto(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.OneToOneField(
-        User, null=True, blank=True, on_delete=models.CASCADE)
+        CustomUser, null=True, blank=True, on_delete=models.CASCADE)
     artist = models.OneToOneField(
         Artist, null=True, blank=True, on_delete=models.CASCADE)
     image = models.ImageField(

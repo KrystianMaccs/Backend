@@ -11,7 +11,7 @@ import random
 import time
 
 from .utils import get_trans_id
-from .models import (SongSales, ArtistPayout, Payout,
+from .models import (SongSales, Payout, ArtistPayout,
                      RoyaltyPayout, Charge, PayoutHistory)
 from .cache import get_song_update_in_progress_status, set_song_update_in_progress_status
 

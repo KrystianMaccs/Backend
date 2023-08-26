@@ -51,6 +51,7 @@ class LoginAPIView(generics.GenericAPIView):
     def post(self, request, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+        print(serializer.data)
         user = serializer.data['user']
 
         response = {

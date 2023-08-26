@@ -138,6 +138,7 @@ class VerifyEmailSerializer(serializers.Serializer):
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField(write_only=True)
+    # email = serializers.EmailField(write_only=True)
     password = serializers.CharField(write_only=True)
     user = serializers.ReadOnlyField()
     token = serializers.CharField(max_length=255, read_only=True)
@@ -175,7 +176,7 @@ class ResetPasswordSerializer(serializers.Serializer):
 class GlobalUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = 'id', 'email', 'first_name', 'last_name'
+        fields = ['id', 'email', 'first_name', 'last_name']
         
 class GlobalSSOArtistSerializer(serializers.ModelSerializer):
     dp = serializers.SerializerMethodField(read_only=True)

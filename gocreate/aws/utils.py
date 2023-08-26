@@ -1,7 +1,12 @@
 from storages.backends.s3boto3 import S3Boto3Storage
 
 
-def StaticRootS3BotoStorage(): return S3Boto3Storage(location='static')
+class StaticRootS3BotoStorage(S3Boto3Storage):
+    location = 'static'
+    default_acl = 'public-read'
 
 
-def MediaRootS3BotoStorage(): return S3Boto3Storage(location='media')
+class MediaRootS3BotoStorage(S3Boto3Storage):
+    location = 'media'
+    default_acl = 'public-read'
+    file_overwrite = False

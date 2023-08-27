@@ -6,8 +6,7 @@ bin/
 include/
 file/
 files/
-/static/
-static/
+# static/
 pip-selfcheck.json
 .env.dev
 .env.bat

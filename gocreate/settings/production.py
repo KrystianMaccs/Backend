@@ -15,8 +15,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get(
-    'SECRET_KEY', 'eHIW$&G*&H$G&P(W*HFOhco2hrpv78yvp87yrv78y')
+SECRET_KEY = 'eHIW$&G*&H$G&P(W*HFOhco2hrpv78yvp87yrv78y'
 
 DEBUG = True
 
@@ -106,10 +105,24 @@ DATABASES = {}
 # }
 
 # db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
-DATABASES["default"] = dj_database_url.parse(
-    os.getenv("PROD_DATABASE_URL"),
-    conn_max_age=600,
-)
+# DATABASES["default"] = dj_database_url.parse(
+# "postgres://gocreateadmin:ibukun123@gocreatedb.cycji6abxj6b.us-east-2.rds.amazonaws.com:5432/gocreateafricadb",
+# conn_max_age=600,
+# )
+# DATABASES["default"] = dj_database_url.parse("postgres://gocreate:ibukun123@database-2.cycji6abxj6b.us-east-2.rds.amazonaws.com:5432/gocreatedb",
+#     conn_max_age=600,
+# )
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "gocreatedb",
+        "USER": "gocreate",
+        "PASSWORD": "ibukun123",
+        "HOST": "database-2.cycji6abxj6b.us-east-2.rds.amazonaws.com",
+        "PORT": 5432,
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -127,17 +140,19 @@ Q_CLUSTER = {
     # 'redis': os.environ.get("REDIS_TLS_URL", os.environ.get('REDIS_URL', 'redis://localhost:6379'))
 }
 
-CORS_REPLACE_HTTPS_REFERER = True
-HOST_SCHEME = "https://"
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_SECONDS = 1000000
-SECURE_FRAME_DENY = True
+# CORS_REPLACE_HTTPS_REFERER = True
+# HOST_SCHEME = "https://"
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_SSL_REDIRECT = True
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_HSTS_SECONDS = 1000000
+# SECURE_FRAME_DENY = True
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+AUTH_USER_MODEL = "accounts.CustomUser"
 
 AUTHENTICATION_BACKENDS = [
     'accounts.backends.CustomArtistBackend',
@@ -241,3 +256,21 @@ EMAIL_HOST_PASSWORD = 'Makeit123'
 EMAIL_HOST_USER = " admin@gocreateapps.app"
 EMAIL_HOST_PASSWORD = 'Makeithappen123'
 EMAIL_USE_TLS = True
+
+CORS_ALLOW_CREDENTIALS = True
+
+# HOST_SCHEME = "http://"
+# SECURE_PROXY_SSL_HEADER = None
+# SECURE_SSL_REDIRECT = False
+# SESSION_COOKIE_SECURE = False
+# CSRF_COOKIE_SECURE = False
+# SECURE_HSTS_SECONDS = None
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+# SECURE_FRAME_DENY = False
+
+# EMAIL_HOST = 'localhost'
+# EMAIL_PORT = 1025
+
+# FILE_UPLOAD_MAX_MEMORY_SIZE = 2621440 # i.e. 2.5 MB
+CORS_ORIGIN_ALLOW_ALL = True
+

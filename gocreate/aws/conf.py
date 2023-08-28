@@ -29,3 +29,5 @@ AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 #     'Expires': expires,
 #     'Cache-Control': 'max-age=%d' % (int(two_months.total_seconds()), ),
 # }
+# AWS4-HMAC-SHA256 authorization mechanism
+# AWS_S3_SIGNATURE_VERSION = 's3v4'

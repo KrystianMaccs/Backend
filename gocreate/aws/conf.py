@@ -1,8 +1,8 @@
 import datetime
 import os
 
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_ACCESS_KEY_ID = "AKIA6ONUY5ZBNTOHVEY3"
+AWS_SECRET_ACCESS_KEY = "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"
 
 
 DEFAULT_FILE_STORAGE = 'gocreate.aws.utils.MediaRootS3BotoStorage'
@@ -10,8 +10,8 @@ STATICFILES_STORAGE = 'gocreate.aws.utils.StaticRootS3BotoStorage'
 
 AWS_DEFAULT_ACL = "public-read"
 
-AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
-AWS_S3_REGION_NAME = os.environ.get("AWS_S3_REGION_NAME")
+AWS_STORAGE_BUCKET_NAME = "gocreatestatic"
+AWS_S3_REGION_NAME = "us-east-2"
 S3_URL = '//%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
 MEDIA_URL = '//%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
 MEDIA_ROOT = MEDIA_URL

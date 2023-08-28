@@ -9,7 +9,7 @@ files/
 # static/
 pip-selfcheck.json
 .env.dev
-.env.bat
+env.bat
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

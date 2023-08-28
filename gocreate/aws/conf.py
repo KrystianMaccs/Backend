@@ -8,7 +8,7 @@ AWS_SECRET_ACCESS_KEY = "BxNwH6IcqZ9PYKdWX6/a1QRpzTKNY7U3vAU0e9uo"
 DEFAULT_FILE_STORAGE = 'gocreate.aws.utils.MediaRootS3BotoStorage'
 STATICFILES_STORAGE = 'gocreate.aws.utils.StaticRootS3BotoStorage'
 
-AWS_DEFAULT_ACL = "public-read"
+AWS_DEFAULT_ACL = None
 
 AWS_STORAGE_BUCKET_NAME = "gocreatestatic"
 AWS_S3_REGION_NAME = "us-east-2"

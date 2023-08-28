@@ -18,7 +18,6 @@ MEDIA_URL = '//%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
 STATIC_URL = S3_URL + 'static/'
 AWS_QUERYSTRING_AUTH = False
 
-
 # two_months = datetime.timedelta(days=61)
 # date_two_months_later = datetime.date.today() + two_months
 # expires = date_two_months_later.strftime("%A, %d %B %Y 20:00:00 GMT")

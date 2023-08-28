@@ -274,3 +274,4 @@ CORS_ALLOW_CREDENTIALS = True
 # FILE_UPLOAD_MAX_MEMORY_SIZE = 2621440 # i.e. 2.5 MB
 CORS_ORIGIN_ALLOW_ALL = True
 STATIC_ROOT = os.path.join("BASE_DIR", "static/")
+MEDIA_ROOT = os.path.join("BASE_DIR", "media/")

@@ -129,11 +129,12 @@ DATABASES = {
 Q_CLUSTER = {
     'name': 'go_create_async_worker',
     'workers': 3,
+    'retry': 8,
     'recycle': 500,
     'compress': True,
     'save_limit': 5000,
     'queue_limit': 10000,
-    'timeout': 120 * 10,
+    'timeout': 6,
     'cpu_affinity': 1,
     'label': 'Go Create Q',
     'redis': os.environ.get('REDIS_URL', 'redis://localhost:6379')

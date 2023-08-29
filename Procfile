@@ -1,3 +1,3 @@
-web: gunicorn --bind :8000 gocreate.wsgi:application
+# web: gunicorn --bind :8000 gocreate.wsgi:application
 
-qcluster_worker: python manage.py qcluster
+# qcluster_worker: python manage.py qcluster

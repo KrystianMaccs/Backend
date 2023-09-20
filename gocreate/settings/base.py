@@ -170,20 +170,13 @@ TWILIO_SENDER_NUMBER = config("TWILIO_SENDER_NUMBER")
 STRIPE_TEST_KEY = config("STRIPE_TEST_KEY")
 STRIPE_LIVE_KEY = ''
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'mail.privateemail.com'
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = "noreply@gocreateafrica.app"
-# EMAIL_HOST_PASSWORD = 'Makeit123'
-# EMAIL_HOST_USER = " admin@gocreateapps.app"
-# EMAIL_HOST_PASSWORD = 'Makeithappen123'
-# EMAIL_USE_TLS = True
+# Email Settings
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "gocreateapps@gmail.com"
-EMAIL_HOST_PASSWORD = 'ebqqpbeqqjklwjlv'
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 
 

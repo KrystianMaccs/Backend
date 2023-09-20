@@ -1,5 +1,5 @@
 import dj_database_url
-from .base import *
+from settings.base import *
 from gocreate.aws.conf import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)

@@ -1,19 +1,20 @@
 import os
+from decouple import config
 from datetime import timedelta
 from pathlib import Path
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = config("SECRET_KEY")
 
-DEBUG = bool(os.environ.get("DEBUG", default=0))
+DEBUG = config("DEBUG")
 
 # 'DJANGO_ALLOWED_HOSTS' should be a single string of hosts with a space between each.
 # For example: 'DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]'
@@ -104,7 +105,7 @@ INTERNAL_IPS = [
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
-Q_CLUSTER = {
+"""Q_CLUSTER = {
 'name': 'go_create_async_worker',
 'workers': 8,
 'recycle': 500,
@@ -115,22 +116,39 @@ Q_CLUSTER = {
 'cpu_affinity': 1,
 'label': 'Go Create Q',
 'redis': 'redis://localhost:6379'
+}"""
+
+Q_CLUSTER = {
+    'name': 'go_create_async_worker',
+    'workers': 8,
+    'recycle': 500,
+    'timeout': 120,
+    'retry': 150,  # Set an appropriate number of retries here
+    'compress': True,
+    'save_limit': 250,
+    'queue_limit': 500,
+    'cpu_affinity': 1,
+    'label': 'Go Create Q',
+    'redis': 'redis://localhost:6379'
 }
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static/"),
+]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-PAYSTACK_TEST_SECRET_KEY = 'sk_test_eea883ea13202804a14a8aa4acc7074aac8f1d04'
-PAYSTACK_LIVE_SECRET_KEY = 'sk_live_ac187e53e2b5f1dbf885378d30da9c99c3754b33'
+PAYSTACK_TEST_SECRET_KEY = config("PAYSTACK_TEST_SECRET_KEY")
+PAYSTACK_LIVE_SECRET_KEY = config("PAYSTACK_LIVE_SECRET_KEY")
 
 PAYMENT_IS_LIVE = os.getenv('PAYMENT_IS_LIVE', None)
 
 
-EVEARA_CLIENT_ID = 'F1EF64E1BBC616DA8464299202D553AD'
-EVEARA_CLIENT_SECRET = 'pBden/RSOOW2yHgPE0DfkjQqtTj2FH8lzBNxuP3OV0Zy4zAQZ9J5F5dwuB+Gf2F/8RQ='
+EVEARA_CLIENT_ID = config("EVEARA_CLIENT_ID")
+EVEARA_CLIENT_SECRET = config("EVEARA_CLIENT_SECRET")
 
 EVEARA_SAND_BOX_URL = 'https://staging.eveara.com/api/v0.9'
 EVEARA_LIVE_URL = 'https://api.eveara.com/v0.9'
@@ -140,11 +158,11 @@ EVEARA_ID = EVEARA_CLIENT_ID
 EVEARA_SECRET = EVEARA_CLIENT_SECRET
 
 # Found on Twilio Console Dashboard
-TWILIO_SID = 'AC3cfe867cfeace2c3042a56842fffbccd'
-TWILIO_AUTH_TOKEN = 'f5f7d6aa43fc255a79da1c620bbff8ca'
-TWILIO_SENDER_NUMBER = '+12015818651'
+TWILIO_SID = config("TWILIO_SID")
+TWILIO_AUTH_TOKEN = config("TWILIO_AUTH_TOKEN")
+TWILIO_SENDER_NUMBER = config("TWILIO_SENDER_NUMBER")
 
-STRIPE_TEST_KEY = 'sk_test_51IjjhCKVJpjSXxYpvgnIH1ebVwK2Bz3WK1jZS8WwauBNSMv5tK0dAbIOYFt8ESqBgLkMsl9giBA2uQiN68GHX4lf00IpvSQDVf'
+STRIPE_TEST_KEY = config("STRIPE_TEST_KEY")
 STRIPE_LIVE_KEY = ''
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

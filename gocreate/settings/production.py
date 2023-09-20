@@ -1,5 +1,6 @@
 import dj_database_url
 import os
+from decouple import config
 
 from gocreate.aws.conf import *
 
@@ -12,11 +13,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get(
-    'SECRET_KEY', 'eHIW$&G*&H$G&P(W*HFOhco2hrpv78yvp87yrv78y')
+SECRET_KEY = config(
+    'SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', False)
+DEBUG = config('DEBUG')
 
 ALLOWED_HOSTS = ['web.gocreateafrica.app', 'gocreateafrica.app', 'www.web.gocreateafrica.app', '127.0.0.1']
 

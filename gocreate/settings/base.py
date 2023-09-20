@@ -1,4 +1,5 @@
 import os
+from decouple import config
 
 from datetime import timedelta
 from gocreate.aws.conf import *
@@ -12,13 +13,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get(
-    'SECRET_KEY', 'eHIW$&G*&H$G&P(W*HFOhco2hrpv78yvp87yrv78y')
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 TEMPLATES = [
     {
@@ -146,16 +146,17 @@ CORS_ORIGIN_WHITELIST = [
     "http://127.0.0.1:3000",
 ]
 
-TWILIO_SID = os.getenv("TWILIO_SID", None)
+TWILIO_SID = config("TWILIO_SID")
+
 # Found on Twilio Console Dashboard
-TWILIO_AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN", None)
-TWILIO_SENDER_NUMBER = os.getenv('TWILIO_SENDER_NUMBER', None)
+TWILIO_AUTH_TOKEN = config("TWILIO_AUTH_TOKEN")
+TWILIO_SENDER_NUMBER = config('TWILIO_SENDER_NUMBER')
 
-PAYSTACK_TEST_SECRET_KEY = os.getenv('PAYSTACK_TEST_SECRET_KEY', None)
-PAYSTACK_LIVE_SECRET_KEY = os.getenv('PAYSTACK_LIVE_SECRET_KEY', None)
+PAYSTACK_TEST_SECRET_KEY = config('PAYSTACK_TEST_SECRET_KEY')
+PAYSTACK_LIVE_SECRET_KEY = config('PAYSTACK_LIVE_SECRET_KEY')
 
-STRIPE_TEST_KEY = os.getenv('STRIPE_TEST_KEY', None)
-STRIPE_LIVE_KEY = os.getenv('STRIPE_LIVE_KEY', None)
+STRIPE_TEST_KEY = config('STRIPE_TEST_KEY')
+STRIPE_LIVE_KEY = config('STRIPE_LIVE_KEY')
 
 PAYMENT_IS_LIVE = os.getenv('PAYMENT_IS_LIVE', None)
 

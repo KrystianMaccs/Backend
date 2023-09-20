@@ -26,7 +26,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('api/v1/sso/', include('sso.urls')),
-
     path('api/v1/songs/', include('songs.urls')),
     path('api/v1/adverts/', include('adverts.urls')),
     path('api/v1/payouts/', include('payouts.urls')),
@@ -41,14 +40,15 @@ urlpatterns = [
                                                   cache_timeout=0), name='schema-redoc'),
 ]
 
-if settings.DEBUG:
-    extrapattern = [
-        path("__debug__/", include("debug_toolbar.urls")),
+
+
+extrapattern = [
+    path("__debug__/", include("debug_toolbar.urls")),
     ]
-    urlpatterns += extrapattern
-    urlpatterns += static(settings.STATIC_URL,
+urlpatterns += extrapattern
+urlpatterns += static(settings.STATIC_URL,
                           document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL,
+urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
 
 urlpatterns += [re_path('.*',

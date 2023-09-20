@@ -1,9 +1,8 @@
 import datetime
-import os
+from gocreate.settings.base import *
 
-AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID", "AKIA6FO2XNP7QHJAX3FQ")
-AWS_SECRET_ACCESS_KEY = os.getenv(
-    "AWS_SECRET_ACCESS_KEY", "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")
+AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
 
 DEFAULT_FILE_STORAGE = 'gocreate.aws.utils.MediaRootS3BotoStorage'
 STATICFILES_STORAGE = 'gocreate.aws.utils.StaticRootS3BotoStorage'

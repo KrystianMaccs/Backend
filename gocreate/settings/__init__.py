@@ -1,7 +1,7 @@
-from .base import *
+from .dev import *
 
 
 try:
-    from .locals import *
+    from .base import *
 except:
-    from .production import *
+    from .prod import *

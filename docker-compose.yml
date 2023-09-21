@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  web:
+  api:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
@@ -9,9 +9,10 @@ services:
     ports:
       - 8000:8000
     env_file:
-      - ./.env.dev
+      - ./.env
     depends_on:
       - db
+      - redis  # Add this line to make sure it depends on the Redis service
   db:
     image: postgres:15
     volumes:
@@ -20,6 +21,11 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_NAME=postgres
+
+  redis:  # Define the Redis service
+    image: redis:latest
+    ports:
+      - 6379:6379  # Expose the default Redis port
 
 volumes:
   postgres_data:

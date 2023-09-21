@@ -25,6 +25,7 @@ DJANGO_APPS = [
 'django.contrib.admin',
 'django.contrib.auth',
 'django.contrib.contenttypes',
+'django.contrib.sites',
 'django.contrib.sessions',
 'django.contrib.messages',
 'django.contrib.staticfiles',
@@ -54,18 +55,17 @@ THIRD_PARTY_APPS = [
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
-'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 
-'django.middleware.security.SecurityMiddleware',
-'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
 
-'django.middleware.common.CommonMiddleware',
-'django.middleware.csrf.CsrfViewMiddleware',
-'django.contrib.auth.middleware.AuthenticationMiddleware',
-'django.contrib.messages.middleware.MessageMiddleware',
-'django.middleware.clickjacking.XFrameOptionsMiddleware',
-'debug_toolbar.middleware.DebugToolbarMiddleware',
-
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'gocreate.urls'
@@ -198,6 +198,7 @@ SECURE_FRAME_DENY = False
 # FILE_UPLOAD_MAX_MEMORY_SIZE = 2621440 # i.e. 2.5 MB
 CORS_ORIGIN_ALLOW_ALL = True
 
+# AUTH_USER_MODEL = accounts.Artist
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
